@@ -1,4 +1,5 @@
 import time
+import json
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -27,7 +28,14 @@ def exception():
     time.sleep(10)
     exit()
 
-PATH = "C:/Users/Philip/Desktop/Programme/Digital Attendance Substitute/chromedriver.exe"
+# get data
+with open('./config.json') as f:
+    data = json.load(f)
+
+username = data["username"]
+password = data["password"]
+
+PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 # driver = webdriver.Chrome(PATH, options=chrome_options)
 
@@ -50,10 +58,10 @@ while True:
         username = driver.find_element_by_id("username")
         break
 
-username.send_keys("MogilskiPhi")
+username.send_keys(username)
 
 password = driver.find_element_by_id("password")
-password.send_keys("(mcjWb[7>U{R*en6")
+password.send_keys(password)
 
 loginbtn = driver.find_element_by_id("loginbtn")
 loginbtn.click()
